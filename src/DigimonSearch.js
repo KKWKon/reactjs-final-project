@@ -35,6 +35,9 @@ function DigimonSearch(props) {
     setSearchResult(newResult);
   };
 
+  //https://digimon-api.vercel.app/api/digimon
+  //https://digimon-api.vercel.app/api/digimon/name/agumon
+  //https://digimon-api.vercel.app/api/digimon/level/rookie
   useEffect(() => {
     console.log("Initial load");
     const url = "https://digimon-api.vercel.app/api/digimon";
