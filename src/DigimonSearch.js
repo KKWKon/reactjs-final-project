@@ -17,8 +17,16 @@ function DigimonSearch(props) {
     setSearchTerm(event.target.value);
   };
 
+  const filterResult = (fullResult) => {
+    return fullResult.filter((digimon) => {
+      return digimon.name.toLowerCase().includes(searchTerm.toLowerCase());
+    });
+  };
+
   const handleSubmit = (event) => {
     event.preventDefault();
+
+    console.log(searchTerm);
 
     let newResult = [...fullResult];
 
@@ -26,9 +34,7 @@ function DigimonSearch(props) {
       navigate(`/`);
     } else {
       navigate(`/search/${searchTerm}`);
-      newResult = newResult.filter((digimon) => {
-        return digimon.name.toLowerCase().includes(searchTerm.toLowerCase());
-      });
+      newResult = filterResult(newResult);
     }
     console.log(newResult);
 
@@ -45,9 +51,8 @@ function DigimonSearch(props) {
     fetch(url).then((response) => {
       if (response.ok) {
         response.json().then((json) => {
-          console.log(json);
           setFullResult(json);
-          setSearchResult(json);
+          setSearchResult(searchTerm ? filterResult(json) : json);
         });
       }
     });
