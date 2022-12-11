@@ -31,15 +31,21 @@ function DigimonSearch(props) {
   };
 
   const handleButtonFilter = (event) => {
-    console.log(event.target.value);
+    const value = event.target.value;
+    console.log(value);
     let newSearchResult = [...searchResult];
+
+    if (value === selectedButton) {
+      setDisplayResult(newSearchResult);
+      setSelectedButton("");
+      return;
+    }
+
     newSearchResult = newSearchResult.filter((digimon) => {
-      return digimon.level
-        .toLowerCase()
-        .includes(event.target.value.toLowerCase());
+      return digimon.level.toLowerCase().includes(value.toLowerCase());
     });
     setDisplayResult(newSearchResult);
-    setSelectedButton(event.target.value);
+    setSelectedButton(value);
   };
 
   const filterResult = (fullResult) => {
